@@ -2,6 +2,7 @@ package com.bridgelabz.EmployeePayrollApplication.controller;
 
 import com.bridgelabz.EmployeePayrollApplication.model.Employee;
 import com.bridgelabz.EmployeePayrollApplication.service.EmployeeService;
+import com.bridgelabz.EmployeePayrollApplication.dto.EmployeeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,16 +44,16 @@ public class EmployeeController {
 
     // To create a new employee
     @PostMapping("/create")
-    public Employee addEmployee(@RequestBody Employee employee) {
+    public Employee addEmployee(@RequestBody EmployeeDTO employeeDTO) {
         logger.info("Create employee endpoint called");
-        return employeeService.addEmployee(employee);
+        return employeeService.addEmployee(employeeDTO);
     }
 
     // To update the employee
     @PutMapping("/update/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
         logger.info("Update employee endpoint called with ID: {}", id);
-        Employee updatedEmployee = employeeService.updateEmployee(id, employee);
+        Employee updatedEmployee = employeeService.updateEmployee(id, employeeDTO);
         if (updatedEmployee != null) {
             return ResponseEntity.ok(updatedEmployee);
         } else {

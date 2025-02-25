@@ -1,5 +1,6 @@
 package com.bridgelabz.EmployeePayrollApplication.service;
 
+import com.bridgelabz.EmployeePayrollApplication.dto.EmployeeDTO;
 import com.bridgelabz.EmployeePayrollApplication.model.Employee;
 import com.bridgelabz.EmployeePayrollApplication.repository.EmployeeRepository;
 import org.slf4j.Logger;
@@ -18,7 +19,11 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     // Save the employee
-    public Employee addEmployee(Employee employee) {
+    public Employee addEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        employee.setName(employeeDTO.getName());
+        employee.setDepartment(employeeDTO.getDepartment());
+        employee.setSalary(employeeDTO.getSalary());
         return employeeRepository.save(employee);
     }
 
@@ -41,17 +46,16 @@ public class EmployeeService {
     }
 
     // Update the employee
-    public Employee updateEmployee(Long id, Employee updatedEmployee) {
+    public Employee updateEmployee(Long id, EmployeeDTO employeeDTO) {
         // Try block
         try {
             Optional<Employee> optionalEmployee = employeeRepository.findById(id);
             if (optionalEmployee.isPresent()) {
                 logger.info("Updating employee with ID: {}", id);
                 Employee employee = optionalEmployee.get();
-                employee.setName(updatedEmployee.getName());
-                employee.setDepartment(updatedEmployee.getDepartment());
-                employee.setSalary(updatedEmployee.getSalary());
-
+                employee.setName(employeeDTO.getName());
+                employee.setDepartment(employeeDTO.getDepartment());
+                employee.setSalary(employeeDTO.getSalary());
                 return employeeRepository.save(employee);
             } else {
                 logger.warn("No employee found with ID: {}", id);
@@ -71,11 +75,12 @@ public class EmployeeService {
         try {
             employeeRepository.deleteById(id);
             logger.info("Deleted employee with ID: {}", id);
+            return true;
         }
         // Catch block
         catch (Exception e) {
             logger.error("Error deleting employee with ID: {}", id, e);
+            return false;
         }
-        return false;
     }
 }
