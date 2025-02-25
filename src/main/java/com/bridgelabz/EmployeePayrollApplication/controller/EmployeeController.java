@@ -3,6 +3,7 @@ package com.bridgelabz.EmployeePayrollApplication.controller;
 import com.bridgelabz.EmployeePayrollApplication.model.Employee;
 import com.bridgelabz.EmployeePayrollApplication.service.EmployeeService;
 import com.bridgelabz.EmployeePayrollApplication.dto.EmployeeDTO;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class EmployeeController {
 
     // To get employee by id
     @GetMapping("/get/{id}")
-    public ResponseEntity<Optional<Employee>> getEmployeeById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Employee>> getEmployeeById(@PathVariable Long id ) {
         log.info("By ID employee endpoint called with ID: {}", id);
         Optional<Employee> employee = employeeService.getEmployeeById(id);
         if (employee.isPresent()) {
@@ -41,14 +42,14 @@ public class EmployeeController {
 
     // To create a new employee
     @PostMapping("/create")
-    public Employee addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    public Employee addEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
         log.info("Create employee endpoint called");
         return employeeService.addEmployee(employeeDTO);
     }
 
     // To update the employee
     @PutMapping("/update/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id,@Valid @RequestBody EmployeeDTO employeeDTO) {
         log.info("Update employee endpoint called with ID: {}", id);
         Employee updatedEmployee = employeeService.updateEmployee(id, employeeDTO);
         if (updatedEmployee != null) {
