@@ -42,14 +42,14 @@ public class EmployeeController {
 
     // To create a new employee
     @PostMapping("/create")
-    public Employee addEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<?> addEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
         log.info("Create employee endpoint called");
-        return employeeService.addEmployee(employeeDTO);
+        return ResponseEntity.ok(employeeService.addEmployee(employeeDTO));
     }
 
     // To update the employee
     @PutMapping("/update/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id,@Valid @RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<?> updateEmployee(@PathVariable Long id,@Valid @RequestBody EmployeeDTO employeeDTO) {
         log.info("Update employee endpoint called with ID: {}", id);
         Employee updatedEmployee = employeeService.updateEmployee(id, employeeDTO);
         if (updatedEmployee != null) {
