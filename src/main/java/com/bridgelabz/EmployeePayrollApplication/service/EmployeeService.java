@@ -14,7 +14,6 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class EmployeeService {
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -41,7 +40,7 @@ public class EmployeeService {
         }
         // Catch block
         catch (Exception e) {
-            logger.error("Error finding employee with ID {}", id, e);
+            log.error("Error finding employee with ID {}", id, e);
             return Optional.empty();
         }
     }
@@ -52,20 +51,20 @@ public class EmployeeService {
         try {
             Optional<Employee> optionalEmployee = employeeRepository.findById(id);
             if (optionalEmployee.isPresent()) {
-                logger.info("Updating employee with ID: {}", id);
+                log.info("Updating employee with ID: {}", id);
                 Employee employee = optionalEmployee.get();
                 employee.setName(employeeDTO.getName());
                 employee.setDepartment(employeeDTO.getDepartment());
                 employee.setSalary(employeeDTO.getSalary());
                 return employeeRepository.save(employee);
             } else {
-                logger.warn("No employee found with ID: {}", id);
+                log.warn("No employee found with ID: {}", id);
                 return null;
             }
         }
         // Catch block
         catch (Exception e) {
-            logger.error("An unexpected error occurred while updating employee with ID: {}", id, e);
+            log.error("An unexpected error occurred while updating employee with ID: {}", id, e);
             return null;
         }
     }
@@ -75,12 +74,12 @@ public class EmployeeService {
         // Try block
         try {
             employeeRepository.deleteById(id);
-            logger.info("Deleted employee with ID: {}", id);
+            log.info("Deleted employee with ID: {}", id);
             return true;
         }
         // Catch block
         catch (Exception e) {
-            logger.error("Error deleting employee with ID: {}", id, e);
+            log.error("Error deleting employee with ID: {}", id, e);
             return false;
         }
     }
