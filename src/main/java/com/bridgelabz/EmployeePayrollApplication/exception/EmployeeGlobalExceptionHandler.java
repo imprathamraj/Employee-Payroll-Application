@@ -19,5 +19,9 @@ public class EmployeeGlobalExceptionHandler {
                 errors.put(error.getField(), error.getDefaultMessage()));
         return ResponseEntity.badRequest().body(errors);
     }
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeExceptions(Exception ex) {
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.BAD_REQUEST);
+    }
 
 }
