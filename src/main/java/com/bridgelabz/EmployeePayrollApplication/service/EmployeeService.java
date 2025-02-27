@@ -22,8 +22,12 @@ public class EmployeeService {
     public Employee addEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         employee.setName(employeeDTO.getName());
-        employee.setDepartment(employeeDTO.getDepartment());
         employee.setSalary(employeeDTO.getSalary());
+        employee.setGender(employeeDTO.getGender());
+        employee.setStartDate(employeeDTO.getStartDate());
+        employee.setNote(employeeDTO.getNote());
+        employee.setProfilePic(employeeDTO.getProfilePic());
+        employee.setDepartment(employeeDTO.getDepartment());
         return employeeRepository.save(employee);
     }
 
@@ -54,8 +58,12 @@ public class EmployeeService {
                 log.info("Updating employee with ID: {}", id);
                 Employee employee = optionalEmployee.get();
                 employee.setName(employeeDTO.getName());
-                employee.setDepartment(employeeDTO.getDepartment());
                 employee.setSalary(employeeDTO.getSalary());
+                employee.setGender(employeeDTO.getGender());
+                employee.setStartDate(employeeDTO.getStartDate());
+                employee.setNote(employee.getNote());
+                employee.setProfilePic(employee.getProfilePic());
+                employee.setDepartment(employeeDTO.getDepartment());
                 return employeeRepository.save(employee);
             } else {
                 log.warn("No employee found with ID: {}", id);

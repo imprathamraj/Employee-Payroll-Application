@@ -8,7 +8,8 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+
+import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
@@ -20,7 +21,7 @@ public @Data class Employee {
     private String name;
     private double salary;
     private String gender;
-    private String startDate;
+    private LocalDate startDate;
     private String note;
     private String profilePic;
     private String department;

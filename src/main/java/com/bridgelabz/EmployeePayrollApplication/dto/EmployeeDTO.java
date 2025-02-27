@@ -16,7 +16,7 @@ public  @ToString class EmployeeDTO {
     @Min(value = 10000, message = "Salary should be minimum 10,000")
     private double salary;
 
-    @Pattern(regexp = "Male|Female", message = "Gender needs to be male or female only")
+    @Pattern(regexp = "(?i)Male|Female", message = "Gender needs to be male or female only")
     private String gender;
 
     // Date is converted into LocalDate with @JsonFormat and pattern
@@ -32,7 +32,7 @@ public  @ToString class EmployeeDTO {
     @NotBlank(message = "Profile picture can not be set empty")
     private String profilePic;
 
-    @NotNull(message = "Department can not be set empty!")
+    @NotBlank(message = "Department can not be set empty!")
     private String department;
 
 }
