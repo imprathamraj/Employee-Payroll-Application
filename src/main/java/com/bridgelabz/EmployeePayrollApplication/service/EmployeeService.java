@@ -13,10 +13,20 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class EmployeeService {
+public class EmployeeService implements IEmployeePayrollService{
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Override
+    public List<Employee> getEmployee() {
+        return List.of();
+    }
+
+    @Override
+    public Employee getEmployeeById(int id) {
+        return null;
+    }
 
     // Save the employee
     public Employee addEmployee(EmployeeDTO employeeDTO) {
@@ -29,6 +39,11 @@ public class EmployeeService {
         employee.setProfilePic(employeeDTO.getProfilePic());
         employee.setDepartment(employeeDTO.getDepartment());
         return employeeRepository.save(employee);
+    }
+
+    @Override
+    public void deleteEmployee(int id) {
+
     }
 
     // To get all the employees
