@@ -1,6 +1,6 @@
 package com.bridgelabz.EmployeePayrollApplication.dto;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Getter
@@ -9,15 +9,28 @@ import lombok.*;
 @AllArgsConstructor
 public class EmployeeDTO {
 
-    @NotNull
-    @Size(min=2, message = "Name should have atleast 2 characters")
+    @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "Employee name Invalid")
     private String name;
 
-    @NotNull
-    @Size(min=2, message = "Salary should have atleast 2 characters")
+    @Min(value = 10000, message = "Salary should be minimum 10,000")
     private double salary;
 
-    @NotNull
-    @Size(min=5, message = "Salary should have atleast 5 characters")
+    @Pattern(regexp = "male|female", message = "Gender needs to be male or female only")
+    private String gender;
+
+    //Date is converted into LocalDate with @JsonFormat and pattern
+    @JsonFormat(pattern = "dd MMM yyyy")
+    @NotNull(message = "Start date should not be set empty")
+    //Restricting to input only valid past or today's date
+    @PastOrPresent(message = "Start date should be past or today's date")
+    private String startDate;
+
+    @NotBlank(message = "Note can not be set empty")
+    private String note;
+
+    @NotBlank(message = "profilePic can not be set empty")
+    private String profilePic;
+
+    @NotNull(message = "Department can not be set empty!")
     private String department;
 }
