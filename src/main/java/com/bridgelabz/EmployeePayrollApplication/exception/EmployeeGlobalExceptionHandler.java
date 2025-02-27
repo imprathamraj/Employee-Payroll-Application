@@ -34,7 +34,7 @@ public class EmployeeGlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponseDTO> handleHTTPMessageNotReadableException(HttpMessageNotReadableException exception) {
         log.error("Invalid Input Format", exception);
-        ErrorResponseDTO responseDTO = new ErrorResponseDTO(message, "Should have date in the format dd MMM yyyy");
+        ErrorResponseDTO responseDTO = new ErrorResponseDTO( message,"Should have date in the format dd MMM yyyy");
         return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
     }
 
