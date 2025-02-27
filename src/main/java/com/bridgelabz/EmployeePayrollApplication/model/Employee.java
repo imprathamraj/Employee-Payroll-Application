@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -14,14 +15,17 @@ import java.time.LocalDate;
 public @Data class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
-
-    @Column(name = "Name")
     private String name;
     private double salary;
     private String gender;
     private LocalDate startDate;
     private String note;
     private String profilePic;
-    private String department;
+
+    @ElementCollection
+    @CollectionTable(name="employee_Departments",joinColumns = @JoinColumn(name="id"))
+    @Column(name="department")
+    private List<String> department;
 }
