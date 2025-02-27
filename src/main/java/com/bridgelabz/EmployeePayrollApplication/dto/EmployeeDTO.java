@@ -1,6 +1,6 @@
 package com.bridgelabz.EmployeePayrollApplication.dto;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Getter
@@ -9,15 +9,19 @@ import lombok.*;
 @AllArgsConstructor
 public class EmployeeDTO {
 
-    @NotNull
-    @Size(min=2, message = "Name should have atleast 2 characters")
+    @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "Employee name Invalid")
     private String name;
 
-    @NotNull
-    @Size(min=2, message = "Salary should have atleast 2 characters")
+    @Min(value = 10000, message = "Salary should be minimum 10,000")
     private double salary;
 
-    @NotNull
-    @Size(min=5, message = "Salary should have atleast 5 characters")
+    private String gender;
+
+    private String startDate;
+
+    private String note;
+
+    private String profilePic;
+
     private String department;
 }
