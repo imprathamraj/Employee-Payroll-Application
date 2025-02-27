@@ -22,4 +22,8 @@ public class EmployeeDTO {
     @NotBlank(message = "Department can not be set empty!")
     @Size(min=5, message = "Salary should have atleast 5 characters")
     private String department;
+    private String gender;
+    private String startDate;
+    private String note;
+    private String profilePic;
 }
