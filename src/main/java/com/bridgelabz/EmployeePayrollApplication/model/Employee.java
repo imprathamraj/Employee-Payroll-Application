@@ -1,15 +1,13 @@
 package com.bridgelabz.EmployeePayrollApplication.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,6 +15,7 @@ import java.time.LocalDate;
 public @Data class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
     private String name;
     private double salary;
@@ -24,5 +23,9 @@ public @Data class Employee {
     private LocalDate startDate;
     private String note;
     private String profilePic;
-    private String department;
+
+    @ElementCollection
+    @CollectionTable(name="employee_Departments",joinColumns = @JoinColumn(name="id"))
+    @Column(name="department")
+    private List<String> department;
 }

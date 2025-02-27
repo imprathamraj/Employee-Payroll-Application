@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,13 +27,13 @@ public  @ToString class EmployeeDTO {
     @PastOrPresent(message = "Start date should be past or today's date")
     private LocalDate startDate;
 
-    @NotBlank(message = "Note can not be set empty")
+    @NotNull(message = "Note can not be set empty")
     private String note;
 
     @NotBlank(message = "Profile picture can not be set empty")
     private String profilePic;
 
-    @NotBlank(message = "Department can not be set empty!")
-    private String department;
+    @NotNull(message = "Department can not be set empty!")
+    private List<String> department;
 
 }
