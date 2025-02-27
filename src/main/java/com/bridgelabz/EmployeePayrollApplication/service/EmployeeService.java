@@ -61,8 +61,8 @@ public class EmployeeService {
                 employee.setSalary(employeeDTO.getSalary());
                 employee.setGender(employeeDTO.getGender());
                 employee.setStartDate(employeeDTO.getStartDate());
-                employee.setNote(employee.getNote());
-                employee.setProfilePic(employee.getProfilePic());
+                employee.setNote(employeeDTO.getNote());
+                employee.setProfilePic(employeeDTO.getProfilePic());
                 employee.setDepartment(employeeDTO.getDepartment());
                 return employeeRepository.save(employee);
             } else {
