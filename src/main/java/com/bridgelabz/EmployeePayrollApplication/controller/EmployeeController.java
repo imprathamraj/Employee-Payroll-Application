@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +39,20 @@ public class EmployeeController {
         } else {
             log.warn("No employee found with ID: {}", id);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Optional.empty());
+        }
+    }
+
+    // To get employee by department
+    @GetMapping("/get/department/{department}")
+    public ResponseEntity<List<Employee>> getEmployeeByDepartment(@PathVariable("department") List<String> department) {
+        log.info("By Department employee endpoint called with Department: {}", department);
+        List<Employee> employeeList = employeeService.getEmployeeByDepartment(department);
+
+        if (!employeeList.isEmpty()) {
+            return ResponseEntity.ok(employeeList);
+        } else {
+            log.warn("No employees found in department: {}", department);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
         }
     }
 

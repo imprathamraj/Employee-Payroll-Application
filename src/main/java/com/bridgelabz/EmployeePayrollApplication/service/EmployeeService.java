@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,14 @@ public class EmployeeService implements IEmployeePayrollService{
     public Employee getEmployeeById(int id) {
         return null;
     }
+
+
+    @Override
+    public List<Employee> getEmployeeByDepartment(List<String> departments) {
+        return employeeRepository.getEmployeeByDepartment(departments);
+    }
+
+
 
     // Save the employee
     public Employee addEmployee(EmployeeDTO employeeDTO) {

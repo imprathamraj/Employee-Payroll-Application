@@ -10,6 +10,8 @@ public interface IEmployeePayrollService {
 
     Employee getEmployeeById(int id);
 
+    List<Employee> getEmployeeByDepartment(List<String> department);
+
     Employee addEmployee(EmployeeDTO employeeDTO);
 
     void deleteEmployee(int id);
